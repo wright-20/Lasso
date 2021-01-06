@@ -15,7 +15,7 @@ final class PullCommand extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'lasso:pull {--silent}';
+    protected $signature = 'lasso:pull {env} {--silent}';
 
     /**
      * The console command description.
@@ -36,6 +36,10 @@ final class PullCommand extends BaseCommand
         (new ConfigValidator())->validate();
 
         $this->configureApplication($artisan, $filesystem);
+
+        $filesystem->setLassoEnvironment($this->argument('env'));
+
+        config()->set('lasso.compiler.script', $this->argument('script'));
 
         $artisan->setCommand($this);
 
