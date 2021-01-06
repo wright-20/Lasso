@@ -14,7 +14,7 @@ final class PublishCommand extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'lasso:publish {--no-git} {--silent}';
+    protected $signature = 'lasso:publish {env} {--no-git} {--silent}';
 
     /**
      * The console command description.
@@ -35,6 +35,10 @@ final class PublishCommand extends BaseCommand
         (new ConfigValidator())->validate();
 
         $this->configureApplication($artisan, $filesystem, true);
+
+        if ($this->argument('env')) {
+            $filesystem->setLassoEnvironment($this->argument('env'));
+        }
 
         $dontUseGit = $this->option('no-git') === true;
         $this->configureApplication($artisan, $filesystem);
