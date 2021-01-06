@@ -39,8 +39,6 @@ final class PullCommand extends BaseCommand
 
         $filesystem->setLassoEnvironment($this->argument('env'));
 
-        config()->set('lasso.compiler.script', $this->argument('script'));
-
         $artisan->setCommand($this);
 
         $artisan->note(sprintf(
