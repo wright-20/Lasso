@@ -42,12 +42,6 @@ final class PublishCommand extends BaseCommand
 
         config()->set('lasso.compiler.script', $this->argument('script'));
 
-
-        $artisan->note('running ' . config('lasso.compiler.script'));
-
-        dd('exit');
-
-
         $dontUseGit = $this->option('no-git') === true;
         $this->configureApplication($artisan, $filesystem);
 
