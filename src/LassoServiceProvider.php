@@ -5,6 +5,7 @@ namespace Sammyjo20\Lasso;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Sammyjo20\Lasso\Commands\PublishCommand;
 use Sammyjo20\Lasso\Commands\PullCommand;
+use Sammyjo20\Lasso\Commands\PushCommand;
 use Sammyjo20\Lasso\Container\Artisan;
 use Sammyjo20\Lasso\Helpers\Filesystem;
 
@@ -13,7 +14,7 @@ class LassoServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php',
+            __DIR__.'/../config/config.php',
             'lasso'
         );
     }
@@ -33,6 +34,7 @@ class LassoServiceProvider extends BaseServiceProvider
     protected function registerCommands(): self
     {
         $this->commands([
+            PushCommand::class,
             PublishCommand::class,
             PullCommand::class,
         ]);
@@ -46,7 +48,7 @@ class LassoServiceProvider extends BaseServiceProvider
     protected function offerPublishing(): self
     {
         $this->publishes([
-            __DIR__ . '/../config/config.php' => config_path('lasso.php'),
+            __DIR__.'/../config/config.php' => config_path('lasso.php'),
         ], 'lasso-config');
 
         return $this;
